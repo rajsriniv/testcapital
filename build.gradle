@@ -1,0 +1,46 @@
+buildscript {
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.5.2'
+
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'ivy-publish'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.0.0'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-lambda', version: '1.9.7'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'capital.search.Search'
+    }
+}
+
+shadowJar {
+    mergeServiceFiles()
+    baseName = "${project.name}-all"
+    classifier = null
+}
