@@ -1,9 +1,6 @@
 import csv
 import json
-import os
-import requests
 from elasticsearch import Elasticsearch, RequestsHttpConnection
-from requests_aws4auth import AWS4Auth
 import boto3
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 import datetime
@@ -20,11 +17,6 @@ print(credentials.token)
 print(credentials.access_key)
 print(credentials.secret_key)
 print(session.region_name)
-# awsauth = AWS4Auth(credentials.access_key, 
-# credentials.secret_key,  
-# region, 
-# service,
-# session_token=credentials.token)
 awsauth = AWSRequestsAuth(
     aws_access_key=credentials.access_key,
     aws_secret_access_key=credentials.secret_key,
@@ -61,19 +53,5 @@ for row in reader:
     data = json.dumps(row)
     requesturl = url + str(count)
     print('url is ' + requesturl)
-    es.index(index="testcapital", doc_type="_doc", id=count, body=data)
-
-        # with open('/Users/rs186125/Downloads/F_5500_2017_Latest/f_5500_2017_latest' + str(count) + '.json') as json_file:
-        #     data = json.load(json_file)
-        #     response = requests.post(url, data)
-        # filename = '/Users/rs186125/Downloads/F_5500_2017_Latest/f_5500_2017_latest' + str(count) + '.json'
-        # a = open(filename)
-        # data = json.load(a)
-        # print(data)
-        # print('indexing data... ' + str(count))
-        # requesturl = url + str(count)
-        # print('url is ' + requesturl)
-        # response = requests.put(requesturl, auth=awsauth, json=data)
-        # if response.status_code == 200:
-        #     print('indexed data... ' + str(count))        
+    es.index(index="testcapital", doc_type="_doc", id=count, body=data)   
     count = count + 1

@@ -59,13 +59,6 @@ public class Search implements RequestHandler<Request, String> {
       e.printStackTrace();
     }
 
-//    JSONParser parser = new JSONParser();
-//
-//    try {
-//      json = (JSONObject) parser.parse(response.toString());
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
     if (response == null) {
       return null;
     }
