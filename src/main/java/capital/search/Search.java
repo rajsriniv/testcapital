@@ -34,7 +34,6 @@ public class Search implements RequestHandler<Request, String> {
       }
 
     }
-    System.out.println("--------->" + request.getSponsorState());
     if(request.getSponsorState()!=null){
       try {
         url+="?q=SPONS_DFE_MAIL_US_STATE:\""+URLEncoder.encode(request.getSponsorState(), "UTF-8")+"\"";
@@ -62,7 +61,6 @@ public class Search implements RequestHandler<Request, String> {
     if (response == null) {
       return null;
     }
-    System.out.println("---->" + response.toString());
 
     return response.toString();
   }
